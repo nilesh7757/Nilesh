@@ -55,6 +55,12 @@ jobs:
         git config --global user.name "nilesh7757"
 
     - name: Deploy to GitHub Pages
-      run: npm run deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git remote set-url origin "https://github.com/${{ github.repository }}"
+        git checkout main
+        git add dist -f
+        git commit -m "Deploy to GitHub Pages"
+        git push origin main
+        env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
